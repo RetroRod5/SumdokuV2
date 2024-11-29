@@ -1,14 +1,15 @@
 /**
  * The class {@code SumdokuPuzzle} represents a SumdokuPuzzle
  *
- *
+ * @author rodrigostamartacoelho fc61771
+ * @author joão fc63??? TODO
  */
 public class SumdokuPuzzle {
 
    /** TODO
     * The {@code definesPuzzle} function checks if the given 
     * groupMembership and groupsValues
-    * defines a SumdokuPuzzle with a single solution
+    * defines a SumdokuPuzzle with a single solution.
     * 
     * @param groupMembership The matrix representing the groups of the Puzzle
     * @param groupsValues The vector of the sums of each group in groupMembership
@@ -20,7 +21,7 @@ public class SumdokuPuzzle {
 
    /** TODO
     * The {@code SumdokuPuzzle} constructor creates a new SumdokuPuzzle with 
-    * given groupMembership and groupValues
+    * given groupMembership and groupValues.
     *
     * @param groupMembership The matrix representing the groups of the Puzzle
     * @param groupsValues The vector of the sums of each group in groupMembership
@@ -42,7 +43,7 @@ public class SumdokuPuzzle {
 
    /** TODO
     * The {@code numberOfGroups} function returns the number 
-    * of groups of the SumdokuPuzzle
+    * of groups of the SumdokuPuzzle.
     *
     * @return The number of groups in SumdokuPuzzle
     */
@@ -52,7 +53,7 @@ public class SumdokuPuzzle {
 
    /** TODO
     * The {@code groupNumber} function returns the group of a 
-    * specified square of the SumdokuPuzzle
+    * specified square of the SumdokuPuzzle.
     *
     * @param col The column of the square 
     * @param row The row of the square
@@ -63,7 +64,7 @@ public class SumdokuPuzzle {
    }
 
    /** TODO
-    * The {@code valueGroup} function returns the sum of the given group
+    * The {@code valueGroup} function returns the sum of the given group.
     *
     * @param group The specified group
     * @return The sum of the squares in the group
@@ -74,7 +75,7 @@ public class SumdokuPuzzle {
 
    /** TODO
     * The {@code isSolvedBy} function checks if the SumdokuGrid is the
-    * solution to this SumdokuPuzzle
+    * solution to this SumdokuPuzzle.
     *
     * @param playedGrid The SumdokuGrid to check if is a solution
     * @return If the playedGrid is a solution to this puzzle
@@ -87,7 +88,7 @@ public class SumdokuPuzzle {
     * The {@code isPartiallySolvedBy} function checks if the given SumdokuGrid
     * is a partial solution of the SumdokuPuzzle, i.e., the values of the 
     * filled squares of the given playedGrid are equal to the corresponding
-    * squares of the solution to this puzzle
+    * squares of the solution to this puzzle.
     * 
     * @param playedGrid The SumdokuGrid to check if is a partial solution
     * @return If the playedGrid is a partial solution to this puzzle
@@ -98,7 +99,7 @@ public class SumdokuPuzzle {
 
    /** TODO
     * The {@code cluesToString} function returns a String representation of
-    * the clues to the puzzle, i.e., the groups and their sums
+    * the clues to the puzzle, i.e., the groups and their sums.
     *
     * @return A String representation of the clues
     */
@@ -107,7 +108,7 @@ public class SumdokuPuzzle {
    }
 
    /** TODO
-    * The {@code toString} function returns a String representation of SumdokuPuzzle
+    * The {@code toString} function returns a String representation of SumdokuPuzzle.
     *
     * @return The String representation of SumdokuPuzzle
     */

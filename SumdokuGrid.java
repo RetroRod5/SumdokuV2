@@ -2,19 +2,26 @@
  * The class {@code SumdokuGrid} represents a square grid of ints
  * to be used in a SumdokuPuzzle.
  *
- *
+ * @author rodrigostamartacoelho fc61771
+ * @author joão fc63??? TODO
  */
 public class SumdokuGrid{
-   // atributos / campos
+   // atributes / fields
    private final int size;
    private int[][] squares;
+
+   /* invariants
+    *
+    * 3 <= size <= 9
+    * 1 <= square[i][j] <= size
+    */
 
    /**
     * The {@code SumdokuGrid} function is a constructor of SumdokuGrid
     * that creates a SumdokuGrid of a given size, with all squares with 
-    * the value 0
+    * the value 0.
     * @param size The size of the SumdokuGrid ,i.e., the number of rows or columns it has.
-    * @require {@code 2 > size && size < 10}
+    * @require {@code 3 >= size && size <= 9}
     */
    public SumdokuGrid(int size) {
       this.size = size;
@@ -29,7 +36,7 @@ public class SumdokuGrid{
 
    /**
     * The {@code Value} funtion returns the value of a square, given it's
-    * row and column
+    * row and column.
     * @param r The row of the square
     * @param c The column of the square
     * @return The value of the square
@@ -47,8 +54,8 @@ public class SumdokuGrid{
       return size;
    }
 
-   /**
-    * The {@code fill} function fills a specified square with a given value
+   /** TODO
+    * The {@code fill} function fills a specified square with a given value.
     * @param r The row of the square
     * @param c The column of the square
     * @param value The value to fill the square with
@@ -58,7 +65,7 @@ public class SumdokuGrid{
    
    }
 
-   /**
+   /** TODO
     * The {@code isFilled} function checks if a square is filled,
     * given it's row and column.
     * @param r The row of the square
@@ -71,9 +78,9 @@ public class SumdokuGrid{
       return false;
    }
 
-   /**
+   /** TODO
     * The {@code toString} returns a string representation of the SumdokuGrid object
-    * @return a String representation of SumdokuGrid
+    * @return a String representation of SumdokuGrid.
     */
    public String toString() {
       return null;
