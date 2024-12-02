@@ -59,18 +59,22 @@ public class RandomSumdokuPuzzle {
    }
 
    /**
-    * 
+    * TODO
     * @return
     */
    private SumdokuPuzzle SumPuzle3A() {
       int[][] groupMembership = {{0, 1, 1},
-                                  {2, 3, 1},
-                                  {3, 3, 4}};
+                                 {2, 3, 1},
+                                 {3, 3, 4}};
       int[] groupValues = {2, 4, 3, 6, 2};
       SumdokuPuzzle puzzle = new SumdokuPuzzle(groupMembership, groupValues);
       return puzzle;
    }
 
+   /**
+    * TODO
+    * @return
+    */
    private SumdokuPuzzle SumPuzle3B() {
       int[][] groupMembership = {{0, 1, 2},
                                  {1, 2, 0},
@@ -80,6 +84,10 @@ public class RandomSumdokuPuzzle {
       return puzzle;
    }
 
+   /**
+    * TODO
+    * @return
+    */
    private SumdokuPuzzle SumPuzle3C() {
       int[][] groupMembership = {{0, 1, 1},
                                  {0, 2, 3},
@@ -89,22 +97,46 @@ public class RandomSumdokuPuzzle {
       return puzzle;
    }
 
+   /**
+    * TODO
+    * @return
+    */
    private SumdokuPuzzle SumPuzle5A() {
-      int[][] groupMembership = {};
+      int[][] groupMembership = {{},
+                                 {},
+                                 {},
+                                 {},
+                                 {}};
       int[] groupValues = {0};
       SumdokuPuzzle puzzle = new SumdokuPuzzle(groupMembership, groupValues);
       return puzzle;
    }
 
+   /**
+    * TODO
+    * @return
+    */
    private SumdokuPuzzle SumPuzle5B() {
-      int[][] groupMembership = {0};
+      int[][] groupMembership = {{},
+                                 {},
+                                 {},
+                                 {},
+                                 {}};
       int[] groupValues = {0};
       SumdokuPuzzle puzzle = new SumdokuPuzzle(groupMembership, groupValues);
       return puzzle;
    }
 
+   /**
+    * TODO
+    * @return
+    */
    private SumdokuPuzzle SumPuzle5C() {
-      int[][] groupMembership = {0};
+      int[][] groupMembership = {{},
+                                 {},
+                                 {},
+                                 {},
+                                 {}};
       int[] groupValues = {0};
       SumdokuPuzzle puzzle = new SumdokuPuzzle(groupMembership, groupValues);
       return puzzle;
