@@ -7,8 +7,8 @@
  */
 public class SumdokuGrid{
    // atributes / fields
-   private int[][] squares;
 
+   private final int[][] squares;
    /* invariants
     *
     * 3 <= size <= 9
@@ -76,7 +76,7 @@ public class SumdokuGrid{
     * @param c The column of the square
     * @return The value of the square
     */
-   public int Value(int r, int c) {
+   public int value(int r, int c) {
       return squares[r][c];
    }
 
@@ -89,7 +89,7 @@ public class SumdokuGrid{
       return squares.length;
    }
 
-   /** TODO
+   /**
     * The {@code fill} function fills a specified square with a given value.
     * @param r The row of the square
     * @param c The column of the square
@@ -100,7 +100,7 @@ public class SumdokuGrid{
       squares[r][c] = value;
    }
 
-   /** TODO
+   /**
     * The {@code isFilled} function checks if a square is filled,
     * given it's row and column.
     * @param r The row of the square
@@ -146,9 +146,9 @@ public class SumdokuGrid{
       int[][] copy = new int[matrix.length][matrix.length];
 
       // copy values to the copy matrix
-      for (int row = 0; row < matrix.length; row++) {
-         for (int col = 0; col < matrix.length; col++) {
-            copy[row][col] = matrix[row][col];
+      for (int r = 0; r < matrix.length; r++) {
+         for (int c = 0; c < matrix.length; c++) {
+            copy[r][c] = matrix[r][c];
          }
       }
       return copy;
