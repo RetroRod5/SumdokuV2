@@ -38,7 +38,7 @@ public class SumdokuPuzzle {
     * @return the size of the SumdokuPuzzle
     */
    public int size() {
-      return -1;
+      return 2;
    }
 
    /** TODO
