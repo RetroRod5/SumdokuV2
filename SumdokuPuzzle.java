@@ -6,6 +6,11 @@
  */
 public class SumdokuPuzzle {
 
+   private final int SIZE;
+   private final int NUM_SQUARES;
+   private final int[][] GROUPMEMBERSHIP;
+   private final int[] GROUPVALUES;
+
    /** TODO
     * The {@code definesPuzzle} function checks if the given 
     * groupMembership and groupsValues
@@ -13,10 +18,123 @@ public class SumdokuPuzzle {
     * 
     * @param groupMembership The matrix representing the groups of the Puzzle
     * @param groupsValues The vector of the sums of each group in groupMembership
+    * @requires {@code groupMembership != null && groupValues != null}
     * @return  if groupMembership and groupValues defines a valid Puzzle
     */
-   public static boolean definesPuzzle(int[][] groupMembership, int[] groupsValues) {
-      return false;
+   public static boolean definesPuzzle(int[][] groupMembership, int[] groupsValues){
+      //
+      boolean groupMembershipSize = validGroupMembershipSize(groupMembership);
+
+      //
+      boolean groupValuesValidated = validGroupsValues(groupMembership,groupsValues);
+
+      //
+      boolean groupMembershipEntriesValidated = validGroupMembershipEntries(groupMembership,groupsValues);
+
+      //
+      boolean groupValuesNumbers = validNumberOfGroups(groupMembership,groupsValues);
+
+      //
+      boolean puzzleUniqueSolutionValied = puzzleUniqueSolution(groupMembership,groupsValues); 
+
+      return (groupMembershipSize && groupValuesValidated && groupMembershipEntriesValidated && groupValuesNumbers && puzzleUniqueSolutionValied);
+   }
+
+   /**
+    * 
+    * @param groupMembership
+    * @return 
+    */
+   public static boolean validGroupMembershipSize(int[][] groupMembership){
+      if (groupMembership.length < 3 || groupMembership.length > 9){
+         return false;
+      }
+
+      for(int row = 0; row < groupMembership.length; row++){
+         if(groupMembership[row].length != groupMembership.length){
+            return false;
+         }
+      }
+      return true;
+   }
+
+   /**
+    * 
+    * @param groupMembership
+    * @param groupsValues
+    * @return
+    */
+   public static boolean validGroupsValues(int[][] groupMembership, int[]groupsValues){
+      //
+      int totalSquares = groupMembership.length*groupMembership.length;
+
+      //
+      if (groupsValues.length < 1 || groupsValues.length > (totalSquares)){
+         return false;
+      }
+
+      //
+      for (int i = 0; i < groupsValues.length; i++){
+         if(groupsValues[i] == 0){
+            return false;
+         }
+         else{
+            if(groupsValues[i] < 1 || groupsValues[i] > ((totalSquares) + (totalSquares*groupMembership.length))/2){
+               return false;
+            }
+         }
+      }
+      return true;
+   }
+
+   /**
+    * 
+    * @param groupMembership
+    * @param groupsValues
+    * @return
+    */
+   public static boolean validGroupMembershipEntries (int[][] groupMembership, int[] groupsValues){
+      for(int row = 0; row < groupMembership.length; row++){
+         for (int col = 0; col < groupMembership.length; col++){
+            if (groupMembership[col][row] <= 0 || groupMembership[col][row] >= (groupsValues.length - 1)){
+               return false;
+            }
+         }
+      }
+      return true;
+   }
+
+   /**
+    * 
+    * @param groupMembership
+    * @param groupsValues
+    * @return
+    */
+   public static boolean validNumberOfGroups (int[][] groupMembership, int[] groupsValues){
+      for (int g = 0; g < groupsValues.length; g++){
+         boolean isFound = false;
+         for(int row = 0; row < groupMembership.length; row++){
+            for(int col = 0; col < groupMembership.length; col++){
+               if(groupMembership[col][row] == g){
+                  isFound = true;
+               }
+            }
+         }
+         if (isFound == false){
+            return false;
+         }
+      }
+      return true;
+   }
+
+   /** TODO
+    * 
+    * @param groupMembership
+    * @param groupsValues
+    * @return
+    */
+   public static boolean puzzleUniqueSolution (int[][] groupMembership, int[] groupsValues){
+
    }
 
    /** TODO
@@ -27,18 +145,34 @@ public class SumdokuPuzzle {
     * @param groupsValues The vector of the sums of each group in groupMembership
     * @require {@code definesPuzzle(groupMembership, groupValues) == true}
     */
-   public SumdokuPuzzle(int[][] groupMembership, int[] groupsValues) {
-   
+   public SumdokuPuzzle(int[][] groupMembership, int[] groupsValues){
+      //
+      this.SIZE = groupMembership.length;
+
+      //
+      this.GROUPMEMBERSHIP = new int[SIZE][SIZE];
+      for(int row = 0; row < SIZE; row++){
+         for(int col = 0; col < SIZE; col++){
+            this.GROUPMEMBERSHIP[col][row] = groupMembership[col][row];
+         }
+      }
+
+      //
+      this.GROUPVALUES = new int[groupsValues.length];
+      for(int i = 0; i < groupsValues.length; i++){
+         this.GROUPVALUES[i] = groupsValues[i];
+      }
+
    }
 
-   /** TODO
+   /**
     * The {@code size} function returns the size of the SumdokuPuzzle
     * ,i.e., the number of rows or columns it has.
     *
     * @return the size of the SumdokuPuzzle
     */
    public int size() {
-      return 2;
+      return this.SIZE;
    }
 
    /** TODO
@@ -48,7 +182,7 @@ public class SumdokuPuzzle {
     * @return The number of groups in SumdokuPuzzle
     */
    public int numberOfGroups() {
-      return -1;
+      return this.GROUPVALUES.length;
    }
 
    /** TODO
@@ -60,7 +194,7 @@ public class SumdokuPuzzle {
     * @return The group of the given square
     */
    public int groupNumber(int col, int row) {
-      return -1;
+      return this.GROUPMEMBERSHIP[col][row];
    }
 
    /** TODO
@@ -70,7 +204,7 @@ public class SumdokuPuzzle {
     * @return The sum of the squares in the group
     */
    public int valueGroup(int group) {
-      return -1;
+      return this.GROUPVALUES[group];
    }
 
    /** TODO
@@ -81,6 +215,8 @@ public class SumdokuPuzzle {
     * @return If the playedGrid is a solution to this puzzle
     */
    public boolean isSolvedBy(SumdokuGrid playedGrid) {
+      boolean equal = false;
+      if(playedGrid)
       return false;
    }
    
