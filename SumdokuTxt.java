@@ -19,5 +19,11 @@ public class SumdokuTxt {
       grid.fill(0,0,3);
       System.out.println(grid);
 
+      RandomSumdokuPuzzle randomPuzzles = new RandomSumdokuPuzzle(3);
+
+      SumdokuPuzzle puzzle = randomPuzzles.nextPuzzle();
+
+      System.out.println(puzzle);
+
    }
 }

@@ -24,19 +24,13 @@ public class SumdokuGrid{
     */
    public SumdokuGrid(int size) {
       squares = new int[size][size];
-
-      for (int r = 0; r < size; r++) {
-         for (int c = 0; c < size; c++) {
-            fill(r, c, 0);
-         }
-      }
    }
 
    /**
     * The {@code SumdokuGrid} function is a constructor of SumdokuGrid
     * that creates a SumdokuGrid with a given matrix.
     * @param matrix The matrix to create the new Sumdokugrid
-    * @requires {@code isValidMatrix(matrix) == true}
+    * @requires {@code isValidMatrix(matrix)}
     * 
     */
    public SumdokuGrid(int[][] matrix) {
@@ -77,7 +71,7 @@ public class SumdokuGrid{
     * @return The value of the square
     */
    public int value(int r, int c) {
-      return squares[r][c];
+      return squares[r-1][c-1];
    }
 
    /**
@@ -97,7 +91,7 @@ public class SumdokuGrid{
     * @requires {@code r <= this.size() && c <= this.size()}
     */
    public void fill(int r, int c, int value) {
-      squares[r][c] = value;
+      squares[r-1][c-1] = value;
    }
 
    /**
@@ -110,7 +104,7 @@ public class SumdokuGrid{
     */
    public boolean isFilled(int r, int c) {
 
-      return !(squares[r][c] == 0);
+      return !(squares[r-1][c-1] == 0);
    }
 
    /**

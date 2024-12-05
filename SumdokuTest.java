@@ -67,7 +67,7 @@ public class SumdokuTest {
 		col = 2;
 		expected = false;
 		error = checkEqual(expected, obtained, g.toString(), Integer.toString(row), Integer.toString(col)) || error;
-	
+
 		g = new SumdokuGrid(5);
 		row = 1;
 		col = 1;
@@ -499,8 +499,13 @@ public class SumdokuTest {
 	}
 
 	private static SumdokuGrid  grid5() {
-		// solution to {{0,0,0,1,2},{3,3,0,1,2},{4,5,6,6,7},{4,5,8,8,7},{9,9,9,10,10}}  +   
-		// 			   {14,3,5,8,5,3,9,8,5,8,7}
+		/*  solution to {{0,0,0,1,2},
+							  {3,3,0,1,2},
+							  {4,5,6,6,7},
+							  {4,5,8,8,7},
+							  {9,9,9,10,10}}  +   
+		 			   {14,3,5,8,5,3,9,8,5,8,7}
+		*/
 		SumdokuGrid grid = new SumdokuGrid(5);
 		grid.fill(1, 1, 2);
 		grid.fill(1, 2, 5);
