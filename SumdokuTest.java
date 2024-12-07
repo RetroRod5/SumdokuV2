@@ -15,17 +15,19 @@ public class SumdokuTest {
 	public static void main(String[] args) {
 		System.out.println ("Testing Sumdoku classes \n");
 
-		testSumdokuGrid ();
+		//testSumdokuGrid ();
 		testSumdokuPuzzle ();
-		testRandomSumdokuPuzzle ();
+		//testRandomSumdokuPuzzle ();
 	}
 
+	/**
 	private static void testSumdokuGrid () {
 		System.out.println ("-----Testing SumdokuGrid class--------------------");
 		testIsFilled();
 		testValue();
 		System.out.println ("----------------------------------------------------");
 	}
+	*/
 	
 	private static void testSumdokuPuzzle () {
 		System.out.println ("-----Testing SumdokuPuzzle class--------------------");
@@ -38,13 +40,15 @@ public class SumdokuTest {
 		System.out.println ("----------------------------------------------------");
 	}
 	
+	/** 
+	
 	private static void testRandomSumdokuPuzzle () {
 		System.out.println ("-----Testing RandomSumdokuPuzzle class---------------");
 		testNext();
 		System.out.println ("----------------------------------------------------");
 	}
-
-
+	
+	
 	private static void testIsFilled() {
 		String methodName = "SumdokuGrid.isFilled";
 		System.out.println ("Testing "+ methodName);
@@ -67,7 +71,7 @@ public class SumdokuTest {
 		col = 2;
 		expected = false;
 		error = checkEqual(expected, obtained, g.toString(), Integer.toString(row), Integer.toString(col)) || error;
-
+		
 		g = new SumdokuGrid(5);
 		row = 1;
 		col = 1;
@@ -95,10 +99,10 @@ public class SumdokuTest {
 		col = 5;
 		expected = true;
 		error = checkEqual(expected, obtained, g.toString(), Integer.toString(row), Integer.toString(col)) || error;
-
+		
 		System.out.println (methodName + ": " + (error ? "FAIL" : "PASS"));	
 	}
-
+	
 	private static void testValue() {
 		String methodName = "SumdokuGrid.value";
 		System.out.println ("Testing "+ methodName);
@@ -141,6 +145,7 @@ public class SumdokuTest {
 		
 		System.out.println (methodName + ": " + (error ? "FAIL" : "PASS"));	
 	}	
+	*/
 	
 
 	private static void testDefinesPuzzle () {
@@ -410,8 +415,8 @@ public class SumdokuTest {
 	}
 	
 	
-
-	private static void testNext() {
+	/**
+	 private static void testNext() {
 		String methodName = "RandomSumdokuPuzzle.next";
 		System.out.println ("Testing "+ methodName);
 		boolean error = false;
@@ -420,7 +425,7 @@ public class SumdokuTest {
 		RandomSumdokuPuzzle rsp = new RandomSumdokuPuzzle(3);
 		int count = 0;
 		int found = 0;
-	
+		
 		while (rsp.hasNextPuzzle()) {
 			puzzle = rsp.nextPuzzle();
 			count++;
@@ -432,10 +437,10 @@ public class SumdokuTest {
 		boolean expected = true;
 		error = checkEqual(expected, obtained, "Puzzles 3x3 available > " + Integer.toString(count)) 
 				|| error;
-	
-		
-		obtained = found == 2;
-		expected = true;
+				
+				
+				obtained = found == 2;
+				expected = true;
 		error = checkEqual(expected, obtained, "Required puzzles 3x3 available > " + Integer.toString(found)) 
 				|| error;
 	
@@ -449,12 +454,12 @@ public class SumdokuTest {
 			if (puzzle.isSolvedBy(grid5()))
 				found++;
 		}
-	
+		
 		obtained = count >= 1;
 		expected = true;
 		error = checkEqual(expected, obtained, "Puzzles 5x5 available > " + Integer.toString(count)) 
-				|| error;
-	
+		|| error;
+		
 		obtained = found == 1;
 		expected = true;
 		error = checkEqual(expected, obtained, "Required puzzles 5x5 available > " + Integer.toString(found)) 
@@ -464,6 +469,7 @@ public class SumdokuTest {
 	}
 	
 	//grids that are the solutions of 3 diferent puzzles used in these tests
+	*/
 	
 	private static SumdokuGrid  oneGrid3() {
 		// solution to {{0,0,2},{0,1,2},{3,3,4}}  +

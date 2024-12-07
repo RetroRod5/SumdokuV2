@@ -216,14 +216,6 @@ public class RandomSumdokuPuzzle {
     * @return A valid built-in SumdokuPuzzle of size 5
     */
    private SumdokuPuzzle SumPuzzle5C() {
-      /*
-       The solution to ths puzzle is supposed to be:
-         {1, 4, 2, 3, 5},
-         {2, 3, 4, 5, 1},
-         {4, 5, 1, 2, 3},
-         {5, 1, 3, 4, 2},
-         {3, 2, 5, 1, 4}
-       */
       int[][] groupMembership = {{ 0,  1,  2,  3,  4},
                                  { 0,  5,  6,  3,  4},
                                  { 7,  6,  6,  6,  4},
