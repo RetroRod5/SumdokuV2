@@ -10,7 +10,7 @@ public class SumdokuPuzzle {
    private final int[][] groupMembership;
    private final int[] groupsValues;
 
-   /** TODO
+   /**
     * The {@code definesPuzzle} function checks if the given 
     * groupMembership and groupsValues
     * defines a SumdokuPuzzle with a single solution.
@@ -21,22 +21,15 @@ public class SumdokuPuzzle {
     * @return  if groupMembership and groupValues defines a valid Puzzle
     */
    public static boolean definesPuzzle(int[][] groupMembership, int[] groupValues){
-      //
-      boolean groupMembershipSize = validGroupMembershipSize(groupMembership);
+      if (groupMembership == null || groupValues == null) {
+         return false;
+      }
 
-      //
-      boolean groupValuesValidated = validGroupsValues(groupMembership,groupValues);
-
-      //
-      boolean groupMembershipEntriesValidated = validGroupMembershipEntries(groupMembership,groupValues);
-
-      //
-      boolean groupValuesNumbers = validNumberOfGroups(groupMembership,groupValues);
-
-      //
-      boolean puzzleUniqueSolutionValied = puzzleUniqueSolution(groupMembership,groupValues); 
-
-      return (groupMembershipSize && groupValuesValidated && groupMembershipEntriesValidated && groupValuesNumbers && puzzleUniqueSolutionValied);
+      return (validGroupMembershipSize(groupMembership) 
+              && validGroupsValues(groupMembership, groupValues) 
+              && validGroupMembershipEntries(groupMembership, groupValues) 
+              && validNumberOfGroups(groupMembership, groupValues) 
+              && puzzleUniqueSolution(groupMembership, groupValues));
    }
 
    /**
@@ -133,11 +126,15 @@ public class SumdokuPuzzle {
     * @return
     */
    public static boolean puzzleUniqueSolution (int[][] groupMembership, int[] groupValues){
-      SumdokuSolver solver = new SumdokuSolver(groupMembership, groupValues);
-      if(solver.howManySolutions(1) != 1){
-         return false;
-      }
-      return true;
+     for (int[] row : groupMembership) {
+         for (int value : row) {
+             if (value < 0 || value >= groupValues.length) {
+                 return false;
+             }
+         }
+     }
+     SumdokuSolver solver = new SumdokuSolver(groupMembership, groupValues);
+     return solver.howManySolutions(2) == 1;
    }
 
    /** 
@@ -156,14 +153,14 @@ public class SumdokuPuzzle {
       this.groupMembership = new int[size][size];
       for(int row = 0; row < size; row++){
          for(int col = 0; col < size; col++){
-            this.groupMembership[col][row] = groupMembership[col][row];
+            this.groupMembership[col][row] = groupMembership[col][row] + 1 ;
          }
       }
 
       //
       this.groupsValues = new int[groupValues.length];
-      for(int i = 0; i < groupValues.length; i++){
-         this.groupsValues[i] = groupValues[i];
+      for(int group = 0; group < groupValues.length; group++){
+         this.groupsValues[group] = groupValues[group];
       }
    }
 
@@ -196,7 +193,7 @@ public class SumdokuPuzzle {
     * @return The group of the given square
     */
    public int groupNumber(int col, int row) {
-      return this.groupMembership[col][row];
+      return groupMembership[col-1][row-1];
    }
 
    /**
@@ -206,7 +203,7 @@ public class SumdokuPuzzle {
     * @return The sum of the squares in the group
     */
    public int valueGroup(int group) {
-      return groupsValues[group];
+      return groupsValues[group-1];
    }
 
    /** TODO
@@ -224,16 +221,16 @@ public class SumdokuPuzzle {
       }
 
       //
-      for(int group = 0; group < this.groupValues.length; group++){
+      for(int group = 1; group <= groupsValues.length; group++){
          int sum = 0;
-         for (int row = 0; row < size; row++){
-            for(int col = 0; col < size; col++){
-               if (this.groupMembership[col][row] == group){
+         for (int row = 1; row <= size; row++){
+            for(int col = 1; col <= size; col++){
+               if (groupMembership[col-1][row-1] == group){
                   sum += playedGrid.value(col,row);
                }
             }
          }
-         if(sum != groupsValues[group]){
+         if(sum != groupsValues[group-1]){
             return false;
          }
       }
@@ -256,11 +253,11 @@ public class SumdokuPuzzle {
       }
 
       //
-      for (int group = 0; group < groupsValues.length; group++) {
+      for (int group = 1; group <= groupsValues.length; group++) {
          int sum = 0;
-         for (int row = 0; row < size; row++) {
-             for (int col = 0; col < size; col++) {
-                 if (groupMembership[col][row] == group) {
+         for (int row = 1; row <= size; row++) {
+             for (int col = 1; col <= size; col++) {
+                 if (groupMembership[col-1][row-1] == group) {
                      int value = playedGrid.value(col, row);
                      if (value != 0) {
                          sum += value;
@@ -268,7 +265,7 @@ public class SumdokuPuzzle {
                  }
              }
          }
-         if (sum > groupsValues[group]) {
+         if (sum > groupsValues[group-1]) {
              return false;
          }
      }
@@ -283,13 +280,20 @@ public class SumdokuPuzzle {
     */
    public String cluesToString() {
       StringBuilder clues = new StringBuilder();
+
       //
-      for(int group = 0; group < groupsValues.length; group++){
-         clues.append("G").append(group + 1).append(" = ").append(groupsValues[group]).append(" ");
+      for (int row = 1; row <= size; row++) {
+         for (int col = 1; col <= size; col++) {
+            clues.append(" ").append(groupMembership[row - 1][col - 1]);
+         }
+         clues.append("\n");
       }
-      
-      // 
-      clues.append(" \n");
+
+      //
+      for(int group = 1; group <= groupsValues.length; group++){
+         clues.append("G").append(group).append(" = ").append(groupsValues[group-1]).append(" ");
+      }
+      clues.append("\n");
 
       //
       return clues.toString();
