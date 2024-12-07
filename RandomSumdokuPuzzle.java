@@ -106,7 +106,15 @@ public class RandomSumdokuPuzzle {
    }
    
 
-
+   /**
+    * The {@code SumPuzzle3A} function returns the built-in 'A' SumdokuPuzzle
+    * of size 3 and solution:
+    * {2, 1, 3},
+    * {3, 2, 1},
+    * {1, 3, 2}
+    *
+    * @return A valid built-in SumdokuPuzzle of size 3
+    */
    private SumdokuPuzzle SumPuzzle3A() {
       int[][] groupMembership = {{0, 1, 1},
                                  {2, 3, 1},
@@ -117,8 +125,13 @@ public class RandomSumdokuPuzzle {
    }
 
    /**
-    * TODO
-    * @return
+    * The {@code SumPuzzle3B} function returns the built-in 'B' SumdokuPuzzle
+    * of size 3 and solution:
+    * {3, 1, 2},
+    * {1, 2, 3},
+    * {2, 3, 1}
+    *
+    * @return A valid built-in SumdokuPuzzle of size 3
     */
    private SumdokuPuzzle SumPuzzle3B() {
       int[][] groupMembership = {{0, 1, 2},
@@ -130,8 +143,13 @@ public class RandomSumdokuPuzzle {
    }
 
    /**
-    * TODO
-    * @return
+    * The {@code SumPuzzle3C} function returns the built-in 'C' SumdokuPuzzle
+    * of size 3 and solution:
+    * {1, 2, 3},
+    * {2, 3, 1},
+    * {3, 2, 1}
+    *
+    * @return A valid built-in SumdokuPuzzle of size 3
     */
    private SumdokuPuzzle SumPuzzle3C() {
       int[][] groupMembership = {{0, 1, 1},
@@ -143,54 +161,85 @@ public class RandomSumdokuPuzzle {
    }
 
    /**
-    * TODO
-    * @return
+    * The {@code SumPuzzle5A} function returns the built-in 'A' SumdokuPuzzle
+    * of size 5 and solution:
+    * {4, 2, 3, 5, 1},
+    * {2, 3, 5, 1, 4},
+    * {3, 5, 1, 4, 2},
+    * {5, 1, 4, 2, 3},
+    * {1, 4, 2, 3, 5}
+    *
+    * @return A valid built-in SumdokuPuzzle of size 5
     */
    private SumdokuPuzzle SumPuzzle5A() {
-      int[][] groupMembership = {{},
-                                 {},
-                                 {},
-                                 {},
-                                 {}};
-      int[] groupValues = {0};
+      int[][] groupMembership = {{0, 1, 1, 1, 1},
+                                 {0, 2, 2, 3, 3},
+                                 {0, 2, 4, 4, 5},
+                                 {0, 6, 6, 7, 5},
+                                 {8, 8, 9, 7, 5}};
+      int[] groupValues = {14, 11, 13, 5, 5, 10, 5, 5, 5, 2};
       SumdokuPuzzle puzzle = new SumdokuPuzzle(groupMembership, groupValues);
       return puzzle;
    }
 
    /**
-    * TODO
-    * @return
+    * The {@code SumPuzzle5B} function returns the built-in 'B' SumdokuPuzzle
+    * of size 5 and solution:
+    * {1, 4, 2, 5, 3},
+    * {5, 3, 4, 2, 1},
+    * {2, 1, 5, 3, 4},
+    * {3, 2, 1, 4, 5},
+    * {4, 5, 3, 1, 2}
+    *
+    * @return A valid built-in SumdokuPuzzle of size 5
     */
    private SumdokuPuzzle SumPuzzle5B() {
-      int[][] groupMembership = {{},
-                                 {},
-                                 {},
-                                 {},
-                                 {}};
-      int[] groupValues = {0};
+      int[][] groupMembership = {{0, 1, 2, 3, 3},
+                                 {4, 0, 2, 4, 4},
+                                 {5, 5, 0, 6, 6},
+                                 {5, 5, 7, 0, 6},
+                                 {5, 5, 7, 8, 0}};
+      int[] groupValues = {15, 4, 6, 8, 5, 3, 14, 12, 4, 1};
       SumdokuPuzzle puzzle = new SumdokuPuzzle(groupMembership, groupValues);
       return puzzle;
    }
 
    /**
-    * TODO
-    * @return
+    * The {@code SumPuzzle5C} function returns the built-in 'C' SumdokuPuzzle
+    * of size 5 and solution:
+    * {1, 4, 2, 3, 5},
+    * {2, 3, 4, 5, 1},
+    * {4, 5, 1, 2, 3},
+    * {5, 1, 3, 4, 2},
+    * {3, 2, 5, 1, 4}
+    *
+    * @return A valid built-in SumdokuPuzzle of size 5
     */
    private SumdokuPuzzle SumPuzzle5C() {
-      int[][] groupMembership = {{},
-                                 {},
-                                 {},
-                                 {},
-                                 {}};
-      int[] groupValues = {0};
+      /*
+       The solution to ths puzzle is supposed to be:
+         {1, 4, 2, 3, 5},
+         {2, 3, 4, 5, 1},
+         {4, 5, 1, 2, 3},
+         {5, 1, 3, 4, 2},
+         {3, 2, 5, 1, 4}
+       */
+      int[][] groupMembership = {{ 0,  1,  2,  3,  4},
+                                 { 0,  5,  6,  3,  4},
+                                 { 7,  6,  6,  6,  4},
+                                 { 7,  8,  8,  9,  4},
+                                 {10, 10, 11,  4,  4}};
+      int[] groupValues = {3, 4, 2, 8, 16, 3, 12, 9, 4, 4, 5, 5};
       SumdokuPuzzle puzzle = new SumdokuPuzzle(groupMembership, groupValues);
       return puzzle;
    }
 
    /**
     * The {@code shuffleArray} method shuffles the elements of the given
-    * SumdokuPuzzle
+    * SumdokuPuzzle array.
     * 
+    * @param puzzles The array of puzzles to shuffle
+    * @require {@code puzzles != null} 
     */
    private void shuffleArray(SumdokuPuzzle[] puzzles) {
       SumdokuPuzzle[] shufflePuzzles = new SumdokuPuzzle[puzzles.length];

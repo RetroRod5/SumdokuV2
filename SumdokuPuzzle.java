@@ -22,21 +22,11 @@ public class SumdokuPuzzle {
     */
    public static boolean definesPuzzle(int[][] groupMembership, int[] groupValues){
       //
-      boolean groupMembershipSize = validGroupMembershipSize(groupMembership);
-
-      //
-      boolean groupValuesValidated = validGroupsValues(groupMembership,groupValues);
-
-      //
-      boolean groupMembershipEntriesValidated = validGroupMembershipEntries(groupMembership,groupValues);
-
-      //
-      boolean groupValuesNumbers = validNumberOfGroups(groupMembership,groupValues);
-
-      //
-      boolean puzzleUniqueSolutionValied = puzzleUniqueSolution(groupMembership,groupValues); 
-
-      return (groupMembershipSize && groupValuesValidated && groupMembershipEntriesValidated && groupValuesNumbers && puzzleUniqueSolutionValied);
+      return ( validGroupMembershipSize(groupMembership) 
+              && validGroupsValues(groupMembership,groupValues) 
+              && validGroupMembershipEntries(groupMembership,groupValues) 
+              && validNumberOfGroups(groupMembership,groupValues)
+              && puzzleUniqueSolution(groupMembership,groupValues));
    }
 
    /**
