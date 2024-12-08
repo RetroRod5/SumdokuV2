@@ -15,7 +15,7 @@ public class RandomSumdokuPuzzle {
    private int puzzlesUsed;
 
    private final int NUM_SIZE_3_PUZZLES = 3;
-   private final int NUM_SIZE_5_PUZZLES = 3;
+   private final int NUM_SIZE_5_PUZZLES = 4;
 
    /* invariants
     *
@@ -65,7 +65,7 @@ public class RandomSumdokuPuzzle {
     * @return if it has a SumdokuPuzzle
     */
    public boolean hasNextPuzzle() {
-      return (puzzlesUsed != puzzles.length);
+      return (puzzlesUsed < puzzles.length);
    }
 
    /**
@@ -76,7 +76,7 @@ public class RandomSumdokuPuzzle {
     */
    public SumdokuPuzzle nextPuzzle() {
       puzzlesUsed++;
-      return (puzzlesUsed >= puzzles.length)? null : puzzles[puzzlesUsed-1];
+      return (puzzlesUsed > puzzles.length)? null : puzzles[puzzlesUsed-1];
    }
 
    /**
@@ -87,8 +87,13 @@ public class RandomSumdokuPuzzle {
    private SumdokuPuzzle[] size3Puzzles() {
       SumdokuPuzzle[] puzzles = new SumdokuPuzzle[NUM_SIZE_3_PUZZLES];
       puzzles[0] = SumPuzzle3A();
-      puzzles[1] = SumPuzzle3B();
-      puzzles[2] = SumPuzzle3C();
+      //puzzles[1] = SumPuzzle3B();
+      //puzzles[2] = SumPuzzle3C();
+      puzzles[1] = SumPuzzle3D();
+      puzzles[2] = SumPuzzle3E();
+
+      //puzzles B and C have the same solution to D and E
+      // causing a FAIL on nextTest because found will not be equal to 2
       return puzzles;
    }
 
@@ -102,6 +107,7 @@ public class RandomSumdokuPuzzle {
       puzzles[0] = SumPuzzle5A();
       puzzles[1] = SumPuzzle5B();
       puzzles[2] = SumPuzzle5C();
+      puzzles[3] = SumPuzzle5D();
       return puzzles;
    }
    
@@ -120,8 +126,7 @@ public class RandomSumdokuPuzzle {
                                  {2, 3, 1},
                                  {3, 3, 4}};
       int[] groupValues = {2, 4, 3, 6, 2};
-      SumdokuPuzzle puzzle = new SumdokuPuzzle(groupMembership, groupValues);
-      return puzzle;
+      return new SumdokuPuzzle(groupMembership, groupValues);
    }
 
    /**
@@ -138,8 +143,7 @@ public class RandomSumdokuPuzzle {
                                  {1, 2, 0},
                                  {2, 0, 1}};
       int[] groupValues = {9, 6, 3};
-      SumdokuPuzzle puzzle = new SumdokuPuzzle(groupMembership, groupValues);
-      return puzzle;
+      return new SumdokuPuzzle(groupMembership, groupValues);
    }
 
    /**
@@ -156,8 +160,41 @@ public class RandomSumdokuPuzzle {
                                  {0, 2, 3},
                                  {4, 4, 3}};
       int[] groupValues = {3, 5, 3, 3, 4};
-      SumdokuPuzzle puzzle = new SumdokuPuzzle(groupMembership, groupValues);
-      return puzzle;
+      return new SumdokuPuzzle(groupMembership, groupValues);
+   }
+
+   /** TODO
+    * The {@code SumPuzzle3D} function returns the built-in 'D' SumdokuPuzzle
+    * of size 3 and solution:
+    * {3, 1, 2}
+    * {1, 2, 3}
+    * {2, 3, 1}
+    *
+    * @return  valid built-in SumdokuPuzzle of size 3
+    */
+   private SumdokuPuzzle SumPuzzle3D() {
+      int[][] groupMembership = {{0, 0, 2},
+                                 {0, 1, 2},
+                                 {3, 3, 4}};
+		int[] groupValues = {5, 2, 5, 5, 1};
+      return new SumdokuPuzzle(groupMembership, groupValues);
+   }
+
+   /** TODO
+    * The {@code SumPuzzle3E} function returns the built-in 'E' SumdokuPuzzle
+    * of size 3 and solution:
+    * {1, 2, 3}
+    * {2, 3, 1}
+    * {3, 1, 2}
+    *
+    * @return valid built-in SumdokuPuzzle of size 3
+    */
+   private SumdokuPuzzle SumPuzzle3E() {
+      int[][] groupMembership = {{0, 0, 0},
+                                 {0, 0, 1},
+                                 {0, 1, 1}};
+		int[] groupValues = {14, 4};
+      return new SumdokuPuzzle(groupMembership, groupValues);
    }
 
    /**
@@ -178,8 +215,7 @@ public class RandomSumdokuPuzzle {
                                  {0, 6, 6, 7, 5},
                                  {8, 8, 9, 7, 5}};
       int[] groupValues = {14, 11, 13, 5, 5, 10, 5, 5, 5, 2};
-      SumdokuPuzzle puzzle = new SumdokuPuzzle(groupMembership, groupValues);
-      return puzzle;
+      return new SumdokuPuzzle(groupMembership, groupValues);
    }
 
    /**
@@ -200,8 +236,7 @@ public class RandomSumdokuPuzzle {
                                  {5, 5, 7, 0, 6},
                                  {5, 5, 7, 8, 0}};
       int[] groupValues = {15, 4, 6, 8, 5, 3, 14, 12, 4, 1};
-      SumdokuPuzzle puzzle = new SumdokuPuzzle(groupMembership, groupValues);
-      return puzzle;
+      return new SumdokuPuzzle(groupMembership, groupValues);
    }
 
    /**
@@ -222,8 +257,17 @@ public class RandomSumdokuPuzzle {
                                  { 7,  8,  8,  9,  4},
                                  {10, 10, 11,  4,  4}};
       int[] groupValues = {3, 4, 2, 8, 16, 3, 12, 9, 4, 4, 5, 5};
-      SumdokuPuzzle puzzle = new SumdokuPuzzle(groupMembership, groupValues);
-      return puzzle;
+      return new SumdokuPuzzle(groupMembership, groupValues);
+   }
+   
+   private SumdokuPuzzle SumPuzzle5D() {
+      int[][] groupMembership = {{0,0,0,1,2},
+							            {3,3,0,1,2},
+							            {4,5,6,6,7},
+							            {4,5,8,8,7},
+							            {9,9,9,10,10}};
+      int[] groupValues = {14, 3, 5, 8, 5, 3, 9, 8, 5, 8, 7};
+      return new SumdokuPuzzle(groupMembership, groupValues);
    }
 
    /**
@@ -235,18 +279,25 @@ public class RandomSumdokuPuzzle {
     */
    private void shuffleArray(SumdokuPuzzle[] puzzles) {
       SumdokuPuzzle[] shufflePuzzles = new SumdokuPuzzle[puzzles.length];
-      
+      // for every element of SumdokuPuzzle
       for (int i = 0; i < shufflePuzzles.length; i++) {
-
-         int position = random.nextInt(shufflePuzzles.length - i);
-         int step = 0;
-         for (int j = 0; j < position; j++) {
-               
-             if(shufflePuzzles[j] != null)
-               step++;
-            step++;
+         // randomly choose wich empty space to put it in new array
+         int randomPosition = random.nextInt(shufflePuzzles.length - i);
+         // the number of empty spaces we passed
+         int count = 0;
+         // the actual index to place this element 
+         int randomPositionIndex = -1;
+         // while we are not in the right empty space
+         while (count <= randomPosition) {
+            //go for next space
+            randomPositionIndex++;
+            //if it's empty
+            if(shufflePuzzles[randomPositionIndex] == null)
+               count++;
+            // we don't increment when randomPositionIndex points to a used space
+            // because we are only counting until we reached the right empty position
          }
-         shufflePuzzles[step] = puzzles[i];
+         shufflePuzzles[randomPositionIndex] = puzzles[i];
       }  
 
       puzzles = shufflePuzzles;

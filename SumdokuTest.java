@@ -15,19 +15,19 @@ public class SumdokuTest {
 	public static void main(String[] args) {
 		System.out.println ("Testing Sumdoku classes \n");
 
-		//testSumdokuGrid ();
+		testSumdokuGrid ();
 		testSumdokuPuzzle ();
-		//testRandomSumdokuPuzzle ();
+		testRandomSumdokuPuzzle ();
 	}
 
-	/**
+	
 	private static void testSumdokuGrid () {
 		System.out.println ("-----Testing SumdokuGrid class--------------------");
 		testIsFilled();
 		testValue();
 		System.out.println ("----------------------------------------------------");
 	}
-	*/
+
 	
 	private static void testSumdokuPuzzle () {
 		System.out.println ("-----Testing SumdokuPuzzle class--------------------");
@@ -40,7 +40,7 @@ public class SumdokuTest {
 		System.out.println ("----------------------------------------------------");
 	}
 	
-	/** 
+	 
 	
 	private static void testRandomSumdokuPuzzle () {
 		System.out.println ("-----Testing RandomSumdokuPuzzle class---------------");
@@ -145,7 +145,7 @@ public class SumdokuTest {
 		
 		System.out.println (methodName + ": " + (error ? "FAIL" : "PASS"));	
 	}	
-	*/
+
 	
 
 	private static void testDefinesPuzzle () {
@@ -415,7 +415,7 @@ public class SumdokuTest {
 	}
 	
 	
-	/**
+	
 	 private static void testNext() {
 		String methodName = "RandomSumdokuPuzzle.next";
 		System.out.println ("Testing "+ methodName);
@@ -469,7 +469,7 @@ public class SumdokuTest {
 	}
 	
 	//grids that are the solutions of 3 diferent puzzles used in these tests
-	*/
+	
 	
 	private static SumdokuGrid  oneGrid3() {
 		// solution to {{0,0,2},{0,1,2},{3,3,4}}  +
@@ -487,7 +487,6 @@ public class SumdokuTest {
 		return grid;
 	}
 	
-
 	private static SumdokuGrid  anotherGrid3() {
 		// solution to  {{0,0,0},{0,0,1},{0,1,1}}} + 
 		//              {14,4}
