@@ -253,21 +253,21 @@ public class SumdokuPuzzle {
     */
    public boolean isSolvedBy(SumdokuGrid playedGrid){
       // Validate grid size
-      if(playedGrid.size() != this.size){
+      if(playedGrid.size() != size()){
          return false;
       }
 
       // Verify that all group sums match the expected values
-      for(int group = 1; group <= groupsValues.length; group++){
+      for(int group = 1; group <= numberOfGroups(); group++){
          int sum = 0;
-         for (int row = 1; row <= size; row++){
-            for(int col = 1; col <= size; col++){
-               if (groupMembership[row-1][col-1] == group){
+         for (int row = 1; row <= size(); row++){
+            for(int col = 1; col <= size(); col++){
+               if (groupNumber(row, col) == group){
                   sum += playedGrid.value(row,col);
                }
             }
          }
-         if(sum != groupsValues[group-1]){
+         if(sum != valueGroup(group)){
             return false;
          }
       }
@@ -286,16 +286,16 @@ public class SumdokuPuzzle {
     */
    public boolean isPartiallySolvedBy(SumdokuGrid playedGrid) {
       // Validate grid size
-      if (playedGrid.size() != this.size) {
+      if (playedGrid.size() != size()) {
          return false;
       }
 
       // Verify that partial sums do not exceed group values
-      for (int group = 1; group <= groupsValues.length; group++) {
+      for (int group = 1; group <= numberOfGroups(); group++) {
          int sum = 0;
-         for (int row = 1; row <= size; row++) {
-             for (int col = 1; col <= size; col++) {
-                 if (groupMembership[row-1][col-1] == group) {
+         for (int row = 1; row <= size(); row++) {
+             for (int col = 1; col <= size(); col++) {
+                 if (groupNumber(row, col) == group) {
                      int value = playedGrid.value(row, col);
                      if (value != 0) {
                          sum += value;
@@ -303,7 +303,7 @@ public class SumdokuPuzzle {
                  }
              }
          }
-         if (sum > groupsValues[group-1]) {
+         if (sum > valueGroup(group)) {
              return false;
          }
      }
@@ -321,16 +321,16 @@ public class SumdokuPuzzle {
       StringBuilder clues = new StringBuilder();
 
       // Append the group membership matrix
-      for (int row = 1; row <= size; row++) {
-         for (int col = 1; col <= size; col++) {
-            clues.append(" ").append(groupMembership[row - 1][col - 1]);
+      for (int row = 1; row <= size(); row++) {
+         for (int col = 1; col <= size(); col++) {
+            clues.append(" ").append(groupNumber(col, row));
          }
          clues.append("\n");
       }
 
       // Append the group values
-      for(int group = 1; group <= groupsValues.length; group++){
-         clues.append("G").append(group).append(" = ").append(groupsValues[group-1]).append(" ");
+      for(int group = 1; group <= numberOfGroups(); group++){
+         clues.append("G").append(group).append(" = ").append(valueGroup(group)).append(" ");
       }
       clues.append("\n");
 

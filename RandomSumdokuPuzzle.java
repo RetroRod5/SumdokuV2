@@ -125,7 +125,7 @@ public class RandomSumdokuPuzzle {
       int[][] groupMembership = {{0, 1, 1},
                                  {2, 3, 1},
                                  {3, 3, 4}};
-      int[] groupValues = {2, 4, 3, 6, 2};
+      int[] groupValues = {2, 5, 3, 6, 2};
       return new SumdokuPuzzle(groupMembership, groupValues);
    }
 
