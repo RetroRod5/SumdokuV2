@@ -46,64 +46,62 @@ public class SumdokuTxt {
       }
    }
 
-      static void play(SumdokuPuzzle puzzle, int maxAttempts, Scanner scanner) {
-         SumdokuGrid grid = new SumdokuGrid(puzzle.size());
-         int attempts = 0;
-         boolean solved = false;
+   public static void play(SumdokuPuzzle puzzle, int maxAttempts, Scanner scanner) {
+      SumdokuGrid grid = new SumdokuGrid(puzzle.size());
+      int attempts = 0;
+      boolean solved = false;
 
-         while (attempts < maxAttempts && !solved) {
-            int position;
-            int value;
+      while (attempts < maxAttempts && !solved) {
+         int position;
+         int value;
 
-            // Obter e validar a posição
-            do {
-               System.out.println("Casa a preencher?");
-               while (!scanner.hasNextInt()) {
-                  System.out.println("Entrada inválida. Insira um número.");
-                  scanner.next(); // Limpa entrada inválida
-               }
-               position = scanner.nextInt();
-               if (position < 1 || position > puzzle.size() * puzzle.size()) {
-                  System.out.println("Posição inválida. Selecione uma posição entre 1 e " + puzzle.size() * puzzle.size());
-               }
-            } while (position < 1 || position > puzzle.size() * puzzle.size());
-
-            int row = (position - 1) / puzzle.size() + 1;
-            int col = (position - 1) % puzzle.size() + 1;
-
-            // Obter e validar o valor
-            do {
-               System.out.println("Valor a preencher?");
-               while (!scanner.hasNextInt()) {
-                  System.out.println("Entrada inválida. Insira um número.");
-                  scanner.next(); // Limpa entrada inválida
-               }
-               value = scanner.nextInt();
-               if (value < 1 || value > puzzle.size()) {
-                 System.out.println("Valor inválido. Selecione um valor entre 1 e " + puzzle.size());
-               }
-            } while (value < 1 || value > puzzle.size());
-
-            // Preencher a grade
-            grid.fill(row, col, value);
-            System.out.println(grid); // Mostrar grade atualizada
-
-            attempts++;
-
-            if (puzzle.isSolvedBy(grid)) {
-               System.out.println("Parabéns! Você resolveu o puzzle!");
-               solved = true;
-            } else if (!puzzle.isPartiallySolvedBy(grid)) {
-               System.out.println("Valor incorreto! Tente novamente.");
-               grid.fill(row,col,0);
-               System.out.println(grid);
+         // Obter e validar a posição
+         do {
+            System.out.println("Casa a preencher?");
+            while (!scanner.hasNextInt()) {
+               System.out.println("Entrada inválida. Insira um número.");
+               scanner.next(); // Limpa entrada inválida
             }
-        }
+            position = scanner.nextInt();
+            if (position < 1 || position > puzzle.size() * puzzle.size()) {
+               System.out.println("Posição inválida. Selecione uma posição entre 1 e " + puzzle.size() * puzzle.size());
+            }
+         } while (position < 1 || position > puzzle.size() * puzzle.size());
 
-        if (!solved) {
-            System.out.println("Ops, tentativas esgotadas!");
-            System.out.println("Solução correta:");
-            System.out.println(puzzle.cluesToString());
-        }
-    }
+         int row = (position - 1) / puzzle.size() + 1;
+         int col = (position - 1) % puzzle.size() + 1;
+
+         // Obter e validar o valor
+         do {
+            System.out.println("Valor a preencher?");
+            while (!scanner.hasNextInt()) {
+               System.out.println("Entrada inválida. Insira um número.");
+               scanner.next(); // Limpa entrada inválida
+            }
+            value = scanner.nextInt();
+            if (value < 1 || value > puzzle.size()) {
+              System.out.println("Valor inválido. Selecione um valor entre 1 e " + puzzle.size());
+            }
+         } while (value < 1 || value > puzzle.size());
+
+         // Preencher a grade
+         grid.fill(row, col, value);
+         System.out.println(grid); // Mostrar grade atualizada
+
+         attempts++;
+
+         if (puzzle.isSolvedBy(grid)) {
+            System.out.println("Parabéns! Você resolveu o puzzle!");
+            solved = true;
+         } //else if (!puzzle.isPartiallySolvedBy(grid)) {
+            //System.out.println("Valor incorreto! Tente novamente.");
+            //grid.fill(row,col,0);
+            //System.out.println(grid);
+         //}
+      }
+
+      if (!solved) {
+         System.out.println("Ops, tentativas esgotadas!");
+      }
+   }
 }

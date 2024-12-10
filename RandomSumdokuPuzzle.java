@@ -10,8 +10,8 @@ public class RandomSumdokuPuzzle {
 
    // atributes / fields
    private final int size;
-   private final Random random = new Random();
-   private final SumdokuPuzzle[] puzzles;
+   private final Random random;
+   private SumdokuPuzzle[] puzzles;
    private int puzzlesUsed;
 
    private final int NUM_SIZE_3_PUZZLES = 3;
@@ -33,16 +33,14 @@ public class RandomSumdokuPuzzle {
    public RandomSumdokuPuzzle(int size) {
       this.size = size;
       puzzlesUsed = 0;
-
+      random = new Random();
       switch (size) {
          case 3:
-            puzzles = size3Puzzles();
-            shuffleArray(puzzles);
+            puzzles = shuffleArray(size3Puzzles());
             break;
       
          case 5:
-            puzzles = size5Puzzles();
-            shuffleArray(puzzles);
+            puzzles = shuffleArray(size5Puzzles());
             break;
          default:
             puzzles = null;
@@ -92,7 +90,7 @@ public class RandomSumdokuPuzzle {
       puzzles[1] = SumPuzzle3D();
       puzzles[2] = SumPuzzle3E();
 
-      //puzzles B and C have the same solution to D and E
+      //puzzles B and C have the same solution to D and E respectively
       // causing a FAIL on nextTest because found will not be equal to 2
       return puzzles;
    }
@@ -163,7 +161,7 @@ public class RandomSumdokuPuzzle {
       return new SumdokuPuzzle(groupMembership, groupValues);
    }
 
-   /** TODO
+   /**
     * The {@code SumPuzzle3D} function returns the built-in 'D' SumdokuPuzzle
     * of size 3 and solution:
     * {3, 1, 2}
@@ -180,7 +178,7 @@ public class RandomSumdokuPuzzle {
       return new SumdokuPuzzle(groupMembership, groupValues);
    }
 
-   /** TODO
+   /**
     * The {@code SumPuzzle3E} function returns the built-in 'E' SumdokuPuzzle
     * of size 3 and solution:
     * {1, 2, 3}
@@ -225,17 +223,17 @@ public class RandomSumdokuPuzzle {
     * {5, 3, 4, 2, 1},
     * {2, 1, 5, 3, 4},
     * {3, 2, 1, 4, 5},
-    * {4, 5, 3, 1, 2}
+    * {4, 5, 3, 1, 2} errada
     *
     * @return A valid built-in SumdokuPuzzle of size 5
     */
    private SumdokuPuzzle SumPuzzle5B() {
       int[][] groupMembership = {{0, 1, 2, 3, 3},
-                                 {4, 0, 2, 4, 4},
-                                 {5, 5, 0, 6, 6},
-                                 {5, 5, 7, 0, 6},
-                                 {5, 5, 7, 8, 0}};
-      int[] groupValues = {15, 4, 6, 8, 5, 3, 14, 12, 4, 1};
+                                 {4, 0, 2, 5, 5},
+                                 {6, 6, 0, 7, 7},
+                                 {6, 6, 8, 0, 7},
+                                 {6, 6, 8, 9, 0}};
+      int[] groupValues = {12, 4, 6, 8, 5, 3, 17, 12, 4, 4};
       return new SumdokuPuzzle(groupMembership, groupValues);
    }
 
@@ -260,12 +258,23 @@ public class RandomSumdokuPuzzle {
       return new SumdokuPuzzle(groupMembership, groupValues);
    }
    
-   private SumdokuPuzzle SumPuzzle5D() {
-      int[][] groupMembership = {{0,0,0,1,2},
-							            {3,3,0,1,2},
-							            {4,5,6,6,7},
-							            {4,5,8,8,7},
-							            {9,9,9,10,10}};
+   /**
+    * The {@code SumPuzzle5D} function returns the built-in 'D' SumdokuPuzzle
+    * of size 5 and solution:
+    * {2, 5, 3, 1, 4},
+    * {5, 3, 4, 2, 1},
+    * {1, 2, 5, 4, 3},
+    * {4, 1, 2, 3, 5},
+    * {3, 4, 1, 5, 2}
+    *
+    * @return A valid built-in SumdokuPuzzle of size 5
+    */
+   public SumdokuPuzzle SumPuzzle5D() {
+      int[][] groupMembership = {{0, 0, 0, 1, 2},
+							            {3, 3, 0, 1, 2},
+							            {4, 5, 6, 6, 7},
+							            {4, 5, 8, 8, 7},
+							            {9, 9, 9, 10, 10}};
       int[] groupValues = {14, 3, 5, 8, 5, 3, 9, 8, 5, 8, 7};
       return new SumdokuPuzzle(groupMembership, groupValues);
    }
@@ -277,7 +286,7 @@ public class RandomSumdokuPuzzle {
     * @param puzzles The array of puzzles to shuffle
     * @require {@code puzzles != null} 
     */
-   private void shuffleArray(SumdokuPuzzle[] puzzles) {
+   private SumdokuPuzzle[] shuffleArray(SumdokuPuzzle[] puzzles) {
       SumdokuPuzzle[] shufflePuzzles = new SumdokuPuzzle[puzzles.length];
       // for every element of SumdokuPuzzle
       for (int i = 0; i < shufflePuzzles.length; i++) {
@@ -286,21 +295,22 @@ public class RandomSumdokuPuzzle {
          // the number of empty spaces we passed
          int count = 0;
          // the actual index to place this element 
-         int randomPositionIndex = -1;
+         int positionIndex = -1;
          // while we are not in the right empty space
          while (count <= randomPosition) {
             //go for next space
-            randomPositionIndex++;
+            positionIndex++;
             //if it's empty
-            if(shufflePuzzles[randomPositionIndex] == null)
+            if(shufflePuzzles[positionIndex] == null)
                count++;
-            // we don't increment when randomPositionIndex points to a used space
-            // because we are only counting until we reached the right empty position
          }
-         shufflePuzzles[randomPositionIndex] = puzzles[i];
+         shufflePuzzles[positionIndex] = puzzles[i];
+
+         // we don't increment count when positionIndex points to a used space
+         // because we are only counting empty positions with it
       }  
 
-      puzzles = shufflePuzzles;
+      return shufflePuzzles;
    }
 }
 

@@ -421,11 +421,21 @@ public class SumdokuTest {
 		System.out.println ("Testing "+ methodName);
 		boolean error = false;
 		
+		int[][] membership = {		{0, 0, 0,  1,  2},
+							            {3, 3, 0,  1,  2},
+							            {4, 5, 6,  6,  7},
+							            {4, 5, 8,  8,  7},
+							            {9, 9, 9, 10, 10}};
+		int[] values = {14, 3, 5, 8, 5, 3, 9, 8, 5, 8, 7};
+		SumdokuSolver solver = new SumdokuSolver(membership, values);
 		SumdokuPuzzle puzzle;
 		RandomSumdokuPuzzle rsp = new RandomSumdokuPuzzle(3);
 		int count = 0;
 		int found = 0;
-		
+
+		int[][][] solutions = solver.findSolutions(2);
+		SumdokuGrid solution = new SumdokuGrid(solutions[0]);
+
 		while (rsp.hasNextPuzzle()) {
 			puzzle = rsp.nextPuzzle();
 			count++;
@@ -447,12 +457,12 @@ public class SumdokuTest {
 		rsp = new RandomSumdokuPuzzle(5);
 		count = 0;
 		found = 0;
-	
+
 		while (rsp.hasNextPuzzle()) {
 			puzzle = rsp.nextPuzzle();
 			count++;
 			if (puzzle.isSolvedBy(grid5()))
-				found++;
+				found++;				
 		}
 		
 		obtained = count >= 1;
@@ -503,7 +513,7 @@ public class SumdokuTest {
 		return grid;
 	}
 
-	private static SumdokuGrid  grid5() {
+	public static SumdokuGrid  grid5() {
 		/*  solution to {{0,0,0,1,2},
 							  {3,3,0,1,2},
 							  {4,5,6,6,7},
@@ -517,21 +527,25 @@ public class SumdokuTest {
 		grid.fill(1, 3, 3);
 		grid.fill(1, 4, 1);
 		grid.fill(1, 5, 4);
+
 		grid.fill(2, 1, 5);
 		grid.fill(2, 2, 3);
 		grid.fill(2, 3, 4);
 		grid.fill(2, 4, 2);
 		grid.fill(2, 5, 1);
+
 		grid.fill(3, 1, 1);
 		grid.fill(3, 2, 2);
 		grid.fill(3, 3, 5);
 		grid.fill(3, 4, 4);
 		grid.fill(3, 5, 3);
+
 		grid.fill(4, 1, 4);
 		grid.fill(4, 2, 1);
 		grid.fill(4, 3, 2);
 		grid.fill(4, 4, 3);
 		grid.fill(4, 5, 5);
+
 		grid.fill(5, 1, 3);
 		grid.fill(5, 2, 4);
 		grid.fill(5, 3, 1);

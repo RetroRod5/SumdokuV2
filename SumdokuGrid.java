@@ -104,17 +104,18 @@ public class SumdokuGrid{
     */
    public boolean isFilled(int r, int c) {
 
-      return !(squares[r-1][c-1] == 0);
+      return !(value(r, c) == 0);
    }
 
    /**
-    * The {@code toString} returns a string representation of the SumdokuGrid object
+    * The {@code FancyToString} returns a fancy string representation of the SumdokuGrid object
+    * with a frame
     * @return a String representation of SumdokuGrid.
     */
-   public String toString() {
+   public String FancyToString() {
       StringBuilder str = new StringBuilder();
       str.append("╔");
-      //str.repeat("═", squares.length*2+1);
+      str.repeat("═", squares.length*2+1);
       str.append("╗\n");
       for (int[] rows : squares) {
          str.append("║ ");
@@ -124,9 +125,28 @@ public class SumdokuGrid{
          str.append("║\n");
       }
       str.append("╚");
-      //str.repeat("═", squares.length*2+1);
+      str.repeat("═", squares.length*2+1);
       str.append("╝\n");
 
+      return str.toString();
+   }
+
+   /**
+    * The {@code toString} returns a string representation of the SumdokuGrid object
+    * @return a String representation of SumdokuGrid.
+    */
+   public String toString() {
+      StringBuilder str = new StringBuilder();
+      for (int[] rows : squares) {
+         for (int i : rows) {
+            if(i == 0) {
+               str.append(". ");
+            }
+            else 
+            str.append(i + " ");
+         }
+         str.append("\n");
+      }
       return str.toString();
    }
 

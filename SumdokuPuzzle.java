@@ -9,6 +9,7 @@ public class SumdokuPuzzle {
    private final int size;
    private final int[][] groupMembership;
    private final int[] groupsValues;
+   private final SumdokuGrid puzzleSolution;
 
    /**
     * The {@code definesPuzzle} function checks if the given 
@@ -79,7 +80,7 @@ public class SumdokuPuzzle {
       }
 
       // Check if each group value is valid
-      for (int i = 0; i < groupValues.length; i++){
+      for (int i = 0; i < groupValues.length; i++) {
          if(groupValues[i] == 0){
             return false;
          }
@@ -179,6 +180,8 @@ public class SumdokuPuzzle {
     * @require {@code definesPuzzle(groupMembership, groupValues) == true}
     */
    public SumdokuPuzzle(int[][] groupMembership, int[] groupValues){
+      SumdokuSolver solver = new SumdokuSolver(groupMembership, groupValues);
+
       // Set the size of the puzzle grid
       this.size = groupMembership.length;
 
@@ -186,7 +189,7 @@ public class SumdokuPuzzle {
       this.groupMembership = new int[size][size];
       for(int row = 0; row < size; row++){
          for(int col = 0; col < size; col++){
-            this.groupMembership[row][col] = groupMembership[row][col] + 1 ;
+            this.groupMembership[row][col] = groupMembership[row][col];
          }
       }
 
@@ -195,6 +198,9 @@ public class SumdokuPuzzle {
       for(int group = 0; group < groupValues.length; group++){
          this.groupsValues[group] = groupValues[group];
       }
+
+      //finds solution to this groupMembership and groupvalues and save it
+      puzzleSolution = new SumdokuGrid(solver.findSolutions(2)[0]);
    }
 
    /**
@@ -228,7 +234,7 @@ public class SumdokuPuzzle {
     * @return The group number of the given square
     */
    public int groupNumber(int col, int row) {
-      return groupMembership[row-1][col-1];
+      return groupMembership[row-1][col-1]+1;
    }
 
    /**
@@ -243,6 +249,31 @@ public class SumdokuPuzzle {
       return groupsValues[group-1];
    }
 
+   /*
+   public boolean isSolvedBy(SumdokuGrid playedGrid){
+      // Validate grid size
+      if (playedGrid.size() != size()) {
+         return false;
+      }
+
+      // Verify that all group sums match the expected values
+      for (int group = 1; group <= numberOfGroups(); group++) {
+         int sum = 0;
+         for (int row = 1; row <= size(); row++) {
+            for (int col = 1; col <= size(); col++) {
+               if (groupNumber(row, col) == group) {
+                  sum += playedGrid.value(row, col);
+               }
+            }
+         }
+         if (sum != valueGroup(group)) {
+            return false;
+         }
+      }
+      return true;
+   }
+   */
+
    /**
     * The {@code isSolvedBy} function checks if a given SumdokuGrid is a valid solution for this puzzle.
     *
@@ -251,27 +282,17 @@ public class SumdokuPuzzle {
     * @ensures \result is true if the playedGrid solves the puzzle; false otherwise.
     * @return true if playedGrid is a valid solution for this puzzle; false otherwise.
     */
-   public boolean isSolvedBy(SumdokuGrid playedGrid){
-      // Validate grid size
-      if(playedGrid.size() != size()){
-         return false;
-      }
+   public boolean isSolvedBy(SumdokuGrid playedGrid) {
 
-      // Verify that all group sums match the expected values
-      for(int group = 1; group <= numberOfGroups(); group++){
-         int sum = 0;
-         for (int row = 1; row <= size(); row++){
-            for(int col = 1; col <= size(); col++){
-               if (groupNumber(row, col) == group){
-                  sum += playedGrid.value(row,col);
-               }
-            }
-         }
-         if(sum != valueGroup(group)){
-            return false;
+      boolean isEqual = true;
+      for (int row = 1; row <= playedGrid.size(); row++) {
+         for (int col = 1; col <= playedGrid.size(); col++) {
+            if(puzzleSolution.value( row, col ) != playedGrid.value( row, col ))
+               isEqual = false;
          }
       }
-      return true;
+      return isEqual;
+      
    }
    
    /**
@@ -285,29 +306,18 @@ public class SumdokuPuzzle {
     * @return true if playedGrid is a valid partial solution for this puzzle; false otherwise.
     */
    public boolean isPartiallySolvedBy(SumdokuGrid playedGrid) {
-      // Validate grid size
-      if (playedGrid.size() != size()) {
-         return false;
-      }
 
-      // Verify that partial sums do not exceed group values
-      for (int group = 1; group <= numberOfGroups(); group++) {
-         int sum = 0;
-         for (int row = 1; row <= size(); row++) {
-             for (int col = 1; col <= size(); col++) {
-                 if (groupNumber(row, col) == group) {
-                     int value = playedGrid.value(row, col);
-                     if (value != 0) {
-                         sum += value;
-                     }
-                 }
-             }
+      boolean isEqual = true;
+      for (int row = 1; row <= playedGrid.size(); row++) {
+         for (int col = 1; col <= playedGrid.size(); col++) {
+            if(playedGrid.isFilled(row, col)) {
+            if(puzzleSolution.value( row, col ) != playedGrid.value( row, col ))
+               isEqual = false;
+            }
          }
-         if (sum > valueGroup(group)) {
-             return false;
-         }
-     }
-     return true;
+      }
+      return isEqual;
+      
    }
 
    /**
@@ -345,6 +355,19 @@ public class SumdokuPuzzle {
     * @return a string representation of the puzzle.
     */
    public String toString() {
+      StringBuilder str = new StringBuilder();
+      for (int[] rows : groupMembership) {
+         str.append(" ");
+         for (int i : rows) {
+            str.append(i + " ");
+         }
+         str.append("\n");
+      }
+
+      return str.toString();
+   }
+
+   public String FancyToString() {
       StringBuilder str = new StringBuilder();
       str.append("╔");
       //
