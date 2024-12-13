@@ -233,7 +233,7 @@ public class SumdokuPuzzle {
     * @ensures \result is the group number corresponding to the given cell
     * @return The group number of the given square
     */
-   public int groupNumber(int col, int row) {
+   public int groupNumber(int row, int col) {
       return groupMembership[row-1][col-1]+1;
    }
 
@@ -333,7 +333,7 @@ public class SumdokuPuzzle {
       // Append the group membership matrix
       for (int row = 1; row <= size(); row++) {
          for (int col = 1; col <= size(); col++) {
-            clues.append(" ").append(groupNumber(col, row));
+            clues.append(" ").append(groupNumber(row, col));
          }
          clues.append("\n");
       }

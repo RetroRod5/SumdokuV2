@@ -9,10 +9,18 @@ import java.util.Random;
 public class RandomSumdokuPuzzle {
 
    // atributes / fields
+
+   // The size of the puzzles to give
    private final int size;
-   private final Random random;
-   private SumdokuPuzzle[] puzzles;
+
+   // How many puzzles have been used
    private int puzzlesUsed;
+
+   // Random Class for 
+   private final Random random;
+
+   // The available puzzles
+   private SumdokuPuzzle[] puzzles;
 
    private final int NUM_SIZE_3_PUZZLES = 3;
    private final int NUM_SIZE_5_PUZZLES = 4;
@@ -25,24 +33,52 @@ public class RandomSumdokuPuzzle {
 
    /**
     * The {@code RandomSumdokuPuzzle} creates a new RandomSumdokuPuzzle
-    * for puzzles of the given size.
+    * for puzzles of the given size, if supported.
     * @param size the size of the puzzle to generate
     * @require {@code size == 3 || size == 5}
-    * 
     */
    public RandomSumdokuPuzzle(int size) {
+      // initializes atributes
       this.size = size;
       puzzlesUsed = 0;
       random = new Random();
+
+      //depending on size
       switch (size) {
          case 3:
+            // initialize puzzles with puzzles of size 3 in a random order
             puzzles = shuffleArray(size3Puzzles());
             break;
       
          case 5:
+            // initialize puzzles with puzzles of size 5 in a random order
             puzzles = shuffleArray(size5Puzzles());
             break;
          default:
+            //if size is not supported
+            puzzles = null;
+      }
+   }
+
+   public RandomSumdokuPuzzle(int size, long seed) {
+      // initializes atributes
+      this.size = size;
+      puzzlesUsed = 0;
+      random = new Random(seed);
+
+      //depending on size
+      switch (size) {
+         case 3:
+            // initialize puzzles with puzzles of size 3 in a random order
+            puzzles = shuffleArray(size3Puzzles());
+            break;
+      
+         case 5:
+            // initialize puzzles with puzzles of size 5 in a random order
+            puzzles = shuffleArray(size5Puzzles());
+            break;
+         default:
+            //if size is not supported
             puzzles = null;
       }
    }
@@ -90,7 +126,7 @@ public class RandomSumdokuPuzzle {
       puzzles[1] = SumPuzzle3D();
       puzzles[2] = SumPuzzle3E();
 
-      //puzzles B and C have the same solution to D and E respectively
+      // puzzles B and C have the same solution to D and E respectively
       // causing a FAIL on nextTest because found will not be equal to 2
       return puzzles;
    }
@@ -284,6 +320,7 @@ public class RandomSumdokuPuzzle {
     * SumdokuPuzzle array.
     * 
     * @param puzzles The array of puzzles to shuffle
+    * @return a copy of the given vector with shuffled sumdokuPuzzles
     * @require {@code puzzles != null} 
     */
    private SumdokuPuzzle[] shuffleArray(SumdokuPuzzle[] puzzles) {
