@@ -9,10 +9,12 @@ public class SumdokuGrid{
    // atributes / fields
 
    private final int[][] squares;
+
    /* invariants
     *
-    * 3 <= size <= 9
-    * 1 <= square[i][j] <= size
+    * squares eh uma matriz quadrada
+    * 3 <= squares.length <= 9
+    * 1 <= squares[i][j] <= squares.length
     */
 
    /**
@@ -114,9 +116,18 @@ public class SumdokuGrid{
     */
    public String FancyToString() {
       StringBuilder str = new StringBuilder();
+      int sideLength = squares.length * 2 + 1;
+
+      // drawing the top of the frame
       str.append("╔");
-      //str.repeat("═", squares.length*2+1);
+      //str.repeat("═", squares.length*2+1); only works for java version 21+
+      for(int col = 0; col < sideLength; col++) {
+         str.append("═");
+      }
+
       str.append("╗\n");
+
+      // drawing the sides and the content of the Grid
       for (int[] rows : squares) {
          str.append("║ ");
          for (int i : rows) {
@@ -124,8 +135,13 @@ public class SumdokuGrid{
          }
          str.append("║\n");
       }
+
+      // drawing the bottom line of the frame
       str.append("╚");
-      //str.repeat("═", squares.length*2+1);
+      //str.repeat("═", squares.length*2+1); only works for java version 21+
+      for(int col = 0; col < sideLength; col++) {
+         str.append("═");
+      }
       str.append("╝\n");
 
       return str.toString();

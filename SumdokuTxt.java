@@ -18,7 +18,7 @@ public class SumdokuTxt {
          int gridNumber = Integer.parseInt(args[0]); // Parse grid size from command-line argument
          int totalSquares = gridNumber * gridNumber; // Calculate total squares in the grid
 
-         if (gridNumber >= 3 && gridNumber <= 9) { // Validate grid size is within the allowed range
+         if (gridNumber == 3 || gridNumber == 5) { // Validate grid size is supported
                RandomSumdokuPuzzle puzzleGenerator = new RandomSumdokuPuzzle(gridNumber); // Initialize puzzle generator
 
                if (!puzzleGenerator.hasNextPuzzle()) {
@@ -43,7 +43,7 @@ public class SumdokuTxt {
                System.out.println("Espero que tenhas gostado. Volta sempre!"); // End of the game
          } else {
             // Invalid grid size input
-            System.out.println("Tamanho inválido. Introduza um valor entre 3 e 9.");
+            System.out.println("Tamanho inválido ou não suportado. Introduza um valor entre 3 e 9 que seja suportado.");
          }
          scanner.close(); // Close the scanner
       }
@@ -56,6 +56,7 @@ public class SumdokuTxt {
    * @param puzzle      The Sumdoku puzzle to be solved.
    * @param maxAttempts The maximum number of attempts allowed for solving the puzzle.
    * @param scanner     The Scanner object for reading user input.
+   * @require {@code puzzle != null && scanner != null && maxAttempts}
    */
    public static void play(SumdokuPuzzle puzzle, int maxAttempts, Scanner scanner) {
       SumdokuGrid grid = new SumdokuGrid(puzzle.size()); // Create a new empty grid of the appropriate size

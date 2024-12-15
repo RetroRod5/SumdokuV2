@@ -28,6 +28,7 @@ public class RandomSumdokuPuzzle {
    /* invariants
     *
     * 3 <= size <= 9
+    * puzzlesUsed >= 0
     *
     */
 

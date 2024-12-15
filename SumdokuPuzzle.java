@@ -11,6 +11,14 @@ public class SumdokuPuzzle {
    private final int[] groupsValues;
    private final SumdokuGrid puzzleSolution;
 
+   /* invariants
+    *
+    * 3 <= size <= 9
+    * groupMembership eh uma matriz quadrada de tamanho size
+    * 1 <= groupsMembership[i][j] <= groupsValues.length
+    * groupValues[i] >= 1
+    */
+
    /**
     * The {@code definesPuzzle} function checks if the given 
     * groupMembership and groupsValues
@@ -369,9 +377,15 @@ public class SumdokuPuzzle {
 
    public String FancyToString() {
       StringBuilder str = new StringBuilder();
+      int sideLength = groupMembership.length * 2 + 1;
+      // drawing the top of the frame
       str.append("╔");
-      //
+      for(int col = 0; col < sideLength; col++) {
+         str.append("═");
+      }
       str.append("╗\n");
+
+      // drawing the sides and the content of the groupMembership
       for (int[] rows : groupMembership) {
          str.append("║ ");
          for (int i : rows) {
@@ -379,8 +393,12 @@ public class SumdokuPuzzle {
          }
          str.append("║\n");
       }
+
+      // drawing the bottom line of the frame
       str.append("╚");
-      //
+      for(int col = 0; col < sideLength; col++) {
+         str.append("═");
+      }
       str.append("╝\n");
 
       return str.toString();
