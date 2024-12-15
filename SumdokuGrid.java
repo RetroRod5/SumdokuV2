@@ -115,7 +115,7 @@ public class SumdokuGrid{
    public String FancyToString() {
       StringBuilder str = new StringBuilder();
       str.append("╔");
-      str.repeat("═", squares.length*2+1);
+      //str.repeat("═", squares.length*2+1);
       str.append("╗\n");
       for (int[] rows : squares) {
          str.append("║ ");
@@ -125,7 +125,7 @@ public class SumdokuGrid{
          str.append("║\n");
       }
       str.append("╚");
-      str.repeat("═", squares.length*2+1);
+      //str.repeat("═", squares.length*2+1);
       str.append("╝\n");
 
       return str.toString();
