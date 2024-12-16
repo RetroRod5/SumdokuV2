@@ -257,31 +257,6 @@ public class SumdokuPuzzle {
       return groupsValues[group-1];
    }
 
-   /*
-   public boolean isSolvedBy(SumdokuGrid playedGrid){
-      // Validate grid size
-      if (playedGrid.size() != size()) {
-         return false;
-      }
-
-      // Verify that all group sums match the expected values
-      for (int group = 1; group <= numberOfGroups(); group++) {
-         int sum = 0;
-         for (int row = 1; row <= size(); row++) {
-            for (int col = 1; col <= size(); col++) {
-               if (groupNumber(row, col) == group) {
-                  sum += playedGrid.value(row, col);
-               }
-            }
-         }
-         if (sum != valueGroup(group)) {
-            return false;
-         }
-      }
-      return true;
-   }
-   */
-
    /**
     * The {@code isSolvedBy} function checks if a given SumdokuGrid is a valid solution for this puzzle.
     *

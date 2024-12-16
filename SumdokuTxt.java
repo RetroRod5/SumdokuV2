@@ -18,7 +18,7 @@ public class SumdokuTxt {
          int gridNumber = Integer.parseInt(args[0]); // Parse grid size from command-line argument
          int totalSquares = gridNumber * gridNumber; // Calculate total squares in the grid
 
-         if (gridNumber == 3 || gridNumber == 5) { // Validate grid size is supported
+         if (gridNumber >= 3 && gridNumber <= 9) { // Validate grid size is supported
                RandomSumdokuPuzzle puzzleGenerator = new RandomSumdokuPuzzle(gridNumber); // Initialize puzzle generator
 
                if (!puzzleGenerator.hasNextPuzzle()) {
@@ -35,12 +35,12 @@ public class SumdokuTxt {
 
                      play(puzzle, totalSquares, scanner); // Start the game with the current puzzle
 
-                     System.out.println("Queres tentar resolver um novo puzzle (true/false)?");
+                     System.out.print("Queres tentar resolver um novo puzzle (true/false)? ");
                      String playerChoice = scanner.next();
                      playAgain = playerChoice.equals("true"); // Continue if the user says "true"
                   }
+                  System.out.println("Espero que tenhas gostado. Volta sempre!"); // End of the game
                }
-               System.out.println("Espero que tenhas gostado. Volta sempre!"); // End of the game
          } else {
             // Invalid grid size input
             System.out.println("Tamanho inválido ou não suportado. Introduza um valor entre 3 e 9 que seja suportado.");
@@ -69,10 +69,10 @@ public class SumdokuTxt {
 
          // Get and validate the position from the user
          do {
-            System.out.println("Casa a preencher?");
+            System.out.print("Casa a preencher? ");
             while (!scanner.hasNextInt()) {
                // Handle invalid input for position
-               System.out.println("Entrada inválida. Insira um número.");
+               System.out.println("Entrada inválida. Insira um número. ");
                scanner.next(); // Clear invalid input
             }
             position = scanner.nextInt();
@@ -88,10 +88,10 @@ public class SumdokuTxt {
 
          // Get and validate the value to fill in the grid
          do {
-            System.out.println("Valor a preencher?");
+            System.out.print("Valor a preencher? ");
             while (!scanner.hasNextInt()) {
                // Handle invalid input for value
-               System.out.println("Entrada inválida. Insira um número.");
+               System.out.print("Entrada inválida. Insira um número. ");
                scanner.next(); // Clear invalid input
             }
             value = scanner.nextInt(); // Read the value

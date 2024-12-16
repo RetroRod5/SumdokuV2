@@ -100,7 +100,7 @@ public class RandomSumdokuPuzzle {
     * @return if it has a SumdokuPuzzle
     */
    public boolean hasNextPuzzle() {
-      return (puzzlesUsed < puzzles.length);
+      return puzzles != null && (puzzlesUsed < puzzles.length);
    }
 
    /**
